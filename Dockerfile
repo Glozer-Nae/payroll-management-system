@@ -52,7 +52,7 @@ storage/framework/views bootstrap/cache public/uploads \
 && chmod -R 775 storage bootstrap/cache public/uploads
 # (Optional) Run migrations
 RUN php artisan migrate --force || true
-# Expose port
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 EXPOSE 10000
-# Start Apache
-CMD ["apache2-foreground"]
+CMD ["/start.sh"]
