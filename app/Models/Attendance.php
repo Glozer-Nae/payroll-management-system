@@ -17,4 +17,13 @@ class Attendance extends Model
     {
         return $this->belongsTo(Employee::class);
     }
+
+    protected static function booted()
+{
+    static::saving(function ($attendance) {
+        if ($attendance->status === 'absent') {
+            $attendance->overtime_hours = 0;
+        }
+    });
+}
 }
